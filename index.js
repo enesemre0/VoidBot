@@ -1,3 +1,17 @@
+const http = require('http');
+const express = require('express');
+const moment = require('moment')
+moment.locale("tr")
+const app = express();
+app.get("/", (request, response) => {
+console.log(moment().format("LLLL") + " BERK //\\ CE");
+response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000)
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const ayarlar = require('./ayarlar.json');
@@ -6,7 +20,6 @@ const Canvas = require('canvas')
 const snekfetch = require('snekfetch');
 const fs = require('fs');
 const db = require('quick.db')
-const moment = require('moment');
 const ms = require('parse-ms');
 require('moment-duration-format')
 require('./util/eventLoader')(client);
