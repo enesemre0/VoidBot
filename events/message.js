@@ -13,8 +13,9 @@ cmd = client.commands.get(command);
 } else if (client.aliases.has(command)) {
 cmd = client.commands.get(client.aliases.get(command));
 }
-if (cmd) {
-cmd.run(client, message, params, perms);
-  }
 
+if (cmd) {
+
+cmd.run(client, message, params, perms);
+}
 };
