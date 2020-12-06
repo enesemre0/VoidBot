@@ -110,4 +110,4 @@ return permlvl;
 
 
 
-client.login(ayarlar.token);
+client.login(process.env.TOKEN);

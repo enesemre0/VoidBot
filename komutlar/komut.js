@@ -10,9 +10,8 @@ const embed = new Discord.MessageEmbed()
 .setTitle("MESAJ BAŞLIĞINIZ")
 .setTimestamp() //Bu Ek Saati'de Yollamaya Yarar
 .setDescription("MESAJINIZ | ACIKLAMANIZ")
-.setFooter("ALT SATIR BASLIGINIZ")
+.setFooter("ALT SATIR GBASLIGINIZ")
 .setImage("Fotoğraf yada Gifiniz Büyük Gözüksün İstiyorsanız Buraya Linkini Koyun")
-.setThumbnail("Fotoğraf yada Gifiniz Sağ Üstte Küçük Gözüksün İstiyorsanız Buraya Linkini Koyun")
 
 message.channel.send(embed)
 
@@ -26,7 +25,7 @@ permLevel: 0 //Kullanım Seviyelerini Ayarlarsınız 0 Herkes Kullana Bilir Deme
 };
 
 exports.help = {
-name: 'Komutunuzun Kullanım Anahtarı İsmi',
+name: 'yardım',
 description: 'Komutun Açıklaması',
 usage: 'Komutun Kullanım Şekli'
 }
