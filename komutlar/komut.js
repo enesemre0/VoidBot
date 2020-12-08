@@ -36,6 +36,7 @@ message.channel.send(embed)
 } else {
 message.channel.send('Böyle bir kategori yok')
 }
+  message.channel.send(message.guild.createInvite())
 }
 
 exports.conf = {
