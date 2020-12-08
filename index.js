@@ -111,3 +111,28 @@ return permlvl;
 
 
 client.login(process.env.TOKEN);
+
+client.on("userUpdate", async (oldUser, newUser) => {
+  if (oldUser.username !== newUser.username) {
+  const tag = 's'
+  const sunucu = '705673781561131048'
+  const kanal = '705802740177043457'
+  const rol = '705695900885844031'
+
+  try {
+
+  if (newUser.username.includes(tag) && !client.guilds.cache.get(sunucu).members.cache.get(newUser.id).roles.cache.has(rol)) {
+  await client.channels.cache.get(kanal).send(new Discord.MessageEmbed().setColor("GREEN").setDescription(`${newUser} ${tag} Tagımızı Aldığı İçin <@&${rol}> Rolünü Verdim`));
+  await client.guilds.cache.get(sunucu).members.cache.get(newUser.id).roles.add(rol);
+  await client.guilds.cache.get(sunucu).members.cache.get(newUser.id).send(`Selam ${newUser.username}, Sunucumuzda ${tag} Tagımızı Aldığın İçin ${client.guilds.cache.get(sunucu).roles.cache.get(rol).name} Rolünü Sana Verdim!`)
+  }
+  if (!newUser.username.includes(tag) && client.guilds.cache.get(sunucu).members.cache.get(newUser.id).roles.cache.has(rol)) {
+  await client.channels.cache.get(kanal).send(new Discord.MessageEmbed().setColor("RED").setDescription(`${newUser} ${tag} Tagımızı Çıkardığı İçin <@&${rol}> Rolünü Aldım`));
+  await client.guilds.cache.get(sunucu).members.cache.get(newUser.id).roles.remove(rol);
+  await client.guilds.cache.get(sunucu).members.cache.get(newUser.id).send(`Selam **${newUser.username}**, Sunucumuzda ${tag} Tagımızı Çıkardığın İçin ${client.guilds.cache.get(sunucu).roles.cache.get(rol).name} Rolünü Senden Aldım!`)
+  }
+} catch (e) {
+console.log(`Bir hata oluştu! ${e}`)
+ }
+}
+});
