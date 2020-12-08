@@ -41,10 +41,10 @@ if(durum === "renk"){
 
     if(durum === "yetki"){
     let yetki = args[2]
-    if(!isim) return message.channel.send(new Discord.MessageEmbed().setColor('RED').setDescription(`${rol} rolünün adını ne olarak değiştirmek istersin?`))
+    if(!yetki) return message.channel.send(new Discord.MessageEmbed().setColor('RED').setDescription(`${rol} rolünün yetkisini ne olarak değiştirmek istersin?`))
     rol.edit({
-        name: yetki
-    }).then(role => message.channel.send(embed.setDescription(`${role} rolünün adı başarıyla güncellendi!`)))
+        permission: yetki
+    }).then(role => message.channel.send(embed.setDescription(`${role} rolünün yetkisi başarıyla güncellendi!`)))
     .catch(console.error)
     
    return
