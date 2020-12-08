@@ -1,34 +1,44 @@
 const Discord = require('discord.js');
+const ayarlar = require('../ayarlar.json');
 
-exports.run = async(client, message, args) => {
+var prefix = ayarlar.prefix;
 
-if (!message.author.permissions.has("KULLANABILECEK YETKI İSMİ")) return message.channel.send("⚠ Bu Komutu Kullana Bilmek için `KULLANABILECEK YETKI İSMİ` Yetkisine Sahip Olmalısın!")
+exports.run = (client, message, params) => {
+  const rexusyardım = new Discord.RichEmbed()
+  .setTitle("RexusLeyn Yardım Sistemi")
+  .setColor("RANDOM")
+  .addField("**-genel**", "** `Genel Komutları Gösterir.`**",)
+  .addField("**-yetkili**", "** `Yetkili Komutlarını Gösterir.`**",)
+  .addField("**-koruma**", "** `Koruma Komutlarını Gösterir.`**",)
+  .addField("**-eğlence**", "** `Eğlence Komutlarını Gösterir.`**",)
 
-const embed = new Discord.MessageEmbed()
 
-.setColor("MESAJ RENGI INGILIZCE YAZIN")
-.setTitle("MESAJ BAŞLIĞINIZ")
-.setTimestamp() //Bu Ek Saati'de Yollamaya Yarar
-.setDescription("MESAJINIZ | ACIKLAMANIZ")
-.setFooter("ALT SATIR GBASLIGINIZ")
-.setImage("Fotoğraf yada Gifiniz Büyük Gözüksün İstiyorsanız Buraya Linkini Koyun")
+  
+  
+  .setFooter('RexusLeyn ©️ 2020 Tüm Hakları Saklıdır.')
 
-message.channel.send(embed)
+  if (!params[0]) {
+    const rexuscommand = Array.from(client.commands.keys());
+    const longest = rexuscommand.reduce((long, str) => Math.max(long, str.length), 0);
+    message.channel.send(rexusyardım);
+  } else {
+    let rexuscommands = params[0];
+    if (client.commands.has(rexuscommands)) {
+      rexuscommands = client.commands.get(rexuscommands);
+      message.author.send('RexusLeyn', `= ${rexuscommands.help.name} = \n${rexuscommands.help.description}\nDoğru kullanım: ` + prefix + `${rexuscommands.help.usage}`);
+    }
+  }
+};
 
-}
-
-exports.conf = {
-enabled: true, //Komutun Aktif Olup Olmamasını Ayarlarsınız! true: Aktif | false: Kapalı
-guildOnly: false, //Komutun Sunucu Dışında Aktif Olup Olmamasını Ayarlarsınız! true: Aktif | false: Kapalı
-aliases: [], //Ekstra Komut Anahtarları Gire Bilirsiniz! ["Anahtar-ismi"] Gibi
-permLevel: 0 //Kullanım Seviyelerini Ayarlarsınız 0 Herkes Kullana Bilir Demektir!
+exports.conf = {                             
+  enabled: true,                             
+  guildOnly: false,
+  aliases: ['help',],
+  permLevel: 0
 };
 
 exports.help = {
-name: 'yardım',
-description: 'Komutun Açıklaması',
-usage: 'Komutun Kullanım Şekli'
-}
-
-
-///BERK
+  name: 'yardım',
+  description: 'Tüm komutları gösterir.',
+  usage: 'yardım [komut]'
+};
