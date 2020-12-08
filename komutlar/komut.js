@@ -1,44 +1,46 @@
-const Discord = require('discord.js');
-const ayarlar = require('../ayarlar.json');
+const Discord = require('discord.js')
 
-var prefix = ayarlar.prefix;
+exports.run = async(client, message, args) => {
 
-exports.run = (client, message, params) => {
-  const rexusyardım = new Discord.RichEmbed()
-  .setTitle("RexusLeyn Yardım Sistemi")
-  .setColor("RANDOM")
-  .addField("**-genel**", "** `Genel Komutları Gösterir.`**",)
-  .addField("**-yetkili**", "** `Yetkili Komutlarını Gösterir.`**",)
-  .addField("**-koruma**", "** `Koruma Komutlarını Gösterir.`**",)
-  .addField("**-eğlence**", "** `Eğlence Komutlarını Gösterir.`**",)
+let codare = "desteksunucusulinki"
 
+if(!args[0]) {
+    const embed = new Discord.MessageEmbed()
+    .setAuthor('Yardım', client.user.avatarURL())
+    .setDescription('**Örnek Kullanım:** `g!yardım Kategori`\n**Örnek:** `g!yardım Genel`\n[Gnarge Müzik Botunu Hemen Ekle](https://discord.com)')
+    .addField('Komutlar:', 
+    `[g!yardım Genel](${codare})
+    [g!yardım Eğlence](${codare})
+    [g!yardım Kullanıcı](${codare})
+    [g!yardım Moderasyon](${codare})
+    [g!yardım Moderasyon2](${codare})
+    [g!yardım Yapılandırma](${codare})
+    [g!yardım Sunucu](${codare})
+    [g!yardım Resim](${codare})
+    [g!yardım nsfw](${codare})`)
+    .addField('» Sponsor', 
+    `Bize Destek Verdikleri İçin [serverkurma.com](https://discord.com) Sitesine Teşekkür Ederiz! Çok Uygun Fiyatlara Oyun Sunucuları, Sanal Sunucular Alabilirsiniz. Discord Sunucularına [Katılın!](https://discord.com)`)
+    .setThumbnail(client.user.avatarURL())
+    .setColor("BLUE")
+    .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL())
+    message.channel.send(embed)
+}
+if(args[0] === 'genel' | args[0] === 'eğlence' | args[0] === 'kullanıcı' | args[0] === 'moderasyon' | args[0] === 'moderasyon2' | args[0] === 'yapılandırma' | args[0] === 'sunucu' | args[0] === 'resim' | args[0] === 'nsfw') {
+const embed = new Discord.MessageEmbed()
+.setAuthor(args[0], client.user.avatarURL())
+.setDescription(client.commands.filter(c=>c.conf.kategori === args[0]).map(kmt=>kmt.help.name).join('\:white_small_square: - g!\n ') + '» Linkler\n[Davet Et](https://discord.com) | [Destek Sunucusu](' + codare + ') | [Oy Ver](https://discord.com) | [Web Sitesi](https://discord.com)')
+.setThumbnail(client.user.avatarURL())
+.setColor("BLUE")
+.setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL())
+message.channel.send(embed)
+} else {
+message.channel.send('Böyle bir kategori yok')
+}
+}
 
-  
-  
-  .setFooter('RexusLeyn ©️ 2020 Tüm Hakları Saklıdır.')
-
-  if (!params[0]) {
-    const rexuscommand = Array.from(client.commands.keys());
-    const longest = rexuscommand.reduce((long, str) => Math.max(long, str.length), 0);
-    message.channel.send(rexusyardım);
-  } else {
-    let rexuscommands = params[0];
-    if (client.commands.has(rexuscommands)) {
-      rexuscommands = client.commands.get(rexuscommands);
-      message.author.send('RexusLeyn', `= ${rexuscommands.help.name} = \n${rexuscommands.help.description}\nDoğru kullanım: ` + prefix + `${rexuscommands.help.usage}`);
-    }
-  }
-};
-
-exports.conf = {                             
-  enabled: true,                             
-  guildOnly: false,
-  aliases: ['help',],
-  permLevel: 0
-};
-
+exports.conf = {
+    aliases: []
+}
 exports.help = {
-  name: 'yardım',
-  description: 'Tüm komutları gösterir.',
-  usage: 'yardım [komut]'
-};
+    name: "yardım"
+}
