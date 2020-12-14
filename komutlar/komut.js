@@ -3,7 +3,7 @@ const ayarlar = require('../ayarlar.json');
 
 exports.run = async(client, message, args) => {
 
-let desteksunucusu = "https://discord.gg/t9mza3svC5"
+let desteksunucusu = "https://discord.gg/UZFxuEfxtQ"
 
 if(!args[0]) {
     const embed = new Discord.MessageEmbed()
