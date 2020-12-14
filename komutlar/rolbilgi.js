@@ -9,7 +9,7 @@ exports.run = async (client, msg, args) => {
   
   var hata = new emran.MessageEmbed()
   .setColor("#36393F")
-  .setDescription(`Lütfen Bir Rol Etiketleyin Örnek: \`${prefix}rolbilgi @Üye\``);
+  .setDescription(`Lütfen Bir Rol Etiketleyin yada İsmini Girin Örnek: \`${prefix}rolbilgi @Üye - Üye\``);
   if(!role) return msg.channel.send(hata);
 
         let hex = role.hexColor.toString().slice(1)
