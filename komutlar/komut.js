@@ -1,34 +1,28 @@
 const Discord = require('discord.js')
+const ayarlar = require('../ayarlar.json');
 
 exports.run = async(client, message, args) => {
 
-let codare = "desteksunucusulinki"
+let codare = "https://discord.gg/t9mza3svC5"
 
 if(!args[0]) {
     const embed = new Discord.MessageEmbed()
     .setAuthor('Yardım', client.user.avatarURL())
-    .setDescription('**Örnek Kullanım:** `g!yardım Kategori`\n**Örnek:** `g!yardım Genel`\n[Gnarge Müzik Botunu Hemen Ekle](https://discord.com)')
+    .setDescription('**Örnek Kullanım:** `' + ayarlar.prefix + 'yardım Kategori`\n**Örnek:** `' + ayarlar.prefix + 'yardım genel`\n[VoidBot\'u Hemen Ekle](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8)')
     .addField('Komutlar:', 
-    `[g!yardım Genel](${codare})
-    [g!yardım Eğlence](${codare})
-    [g!yardım Kullanıcı](${codare})
-    [g!yardım Moderasyon](${codare})
-    [g!yardım Moderasyon2](${codare})
-    [g!yardım Yapılandırma](${codare})
-    [g!yardım Sunucu](${codare})
-    [g!yardım Resim](${codare})
-    [g!yardım nsfw](${codare})`)
-    .addField('» Sponsor', 
-    `Bize Destek Verdikleri İçin [serverkurma.com](https://discord.com) Sitesine Teşekkür Ederiz! Çok Uygun Fiyatlara Oyun Sunucuları, Sanal Sunucular Alabilirsiniz. Discord Sunucularına [Katılın!](https://discord.com)`)
+    `[${ayarlar.prefix}yardım genel(${codare})
+    [${ayarlar.prefix}yardım eğlence](${codare})
+    [${ayarlar.prefix}yardım kullanıcı](${codare})
+    [${ayarlar.prefix}yardım moderasyon](${codare})`)
     .setThumbnail(client.user.avatarURL())
-    .setColor("BLUE")
+    .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL())
     message.channel.send(embed)
 }
-if(args[0] === 'genel' | args[0] === 'eğlence' | args[0] === 'kullanıcı' | args[0] === 'moderasyon' | args[0] === 'moderasyon2' | args[0] === 'yapılandırma' | args[0] === 'sunucu' | args[0] === 'resim' | args[0] === 'nsfw') {
+if(args[0] === 'genel' | args[0] === 'eğlence' | args[0] === 'kullanıcı' | args[0] === 'moderasyon') {
 const embed = new Discord.MessageEmbed()
 .setAuthor(args[0], client.user.avatarURL())
-.setDescription(client.commands.filter(c=>c.conf.kategori === args[0]).map(kmt=>kmt.help.name).join('\:white_small_square: - g!\n ') + '» Linkler\n[Davet Et](https://discord.com) | [Destek Sunucusu](' + codare + ') | [Oy Ver](https://discord.com) | [Web Sitesi](https://discord.com)')
+.setDescription(client.commands.filter(c=>c.conf.kategori === args[0]).map(kmt=>kmt.help.name).join('\:white_small_square: - &\n ') + '» Linkler\n[Davet Et](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8) | [Destek Sunucusu](' + codare + ')y Ver](https://discord.com) | [Web Sitesi](https://discord.com)')
 .setThumbnail(client.user.avatarURL())
 .setColor("BLUE")
 .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL())
