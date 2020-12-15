@@ -10,8 +10,8 @@ exports.run = async(client, message, args) => {
    var başarısız = ['**TÜH!** <:hayirgif:787990150331760641>', '**OLMADI BU!** <:hayirgif:787990150331760641>', '**HAY AKSİ!** <:hayirgif:787990150331760641>', '**HADİ ORADAN!** <:hayirgif:787990150331760641>', '**OLMADI YA!** <:hayirgif:787990150331760641>', '**BÖYLE OLMAZ?!** <:hayirgif:787990150331760641>', '**HADİ YA!** <:hayirgif:787990150331760641>'];
    var x2 = başarısız[Math.floor(Math.random() * başarısız.length)];
   
-if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply(`**${ayarlar.prefix}jail-yetkilisi ayarla/sıfırla** isimli komutu kullanabilmek için \`SUNUCUYU YÖNET\` yetkisine sahip olman gerekiyor.`)
-if (!args[0]) return message.reply(`Sistemi kullanabilmek için, &jail-yetkilisi ayarla/sıfırla @rol yazmalısın.\nDetaylı bilgi için: &yardım sustur-kanal`)
+if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply(`**${ayarlar.prefix}jail-kanal ayarla/sıfırla** isimli komutu kullanabilmek için \`SUNUCUYU YÖNET\` yetkisine sahip olman gerekiyor.`)
+if (!args[0]) return message.reply(`Sistemi kullanabilmek için, &jail-kanal ayarla/sıfırla @rol yazmalısın.\nDetaylı bilgi için: &yardım sustur-kanal`)
    
   
   if (args[0] == 'ayarla') {
