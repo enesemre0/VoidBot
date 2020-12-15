@@ -14,7 +14,8 @@ if(!args[0]) {
     .addField('Komutlar:', 
     `${prefix}rolbilgi
      ${prefix}afk
-     ${prefix}istatistik`)
+     ${prefix}istatistik
+     ${prefix}avatar`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());
