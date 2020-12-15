@@ -134,3 +134,26 @@ client.on("message", async msg => {
     msg.member.setNickname(isim);
   }
 });
+client.on('guildMemberAdd', async member => {// chimp ᵈ♡#0110
+const data = require('quick.db')
+const asd = data.fetch(`${member.guild.id}.jail.${member.id}`)
+if(asd) {
+let data2 = await data.fetch(`jailrol_${member.guild.id}`)
+let rol = member.guild.roles.get(data2)
+if(!rol) return;
+let kişi = member.guild.members.get(member.id)
+kişi.addRole(rol.id);
+kişi.roles.forEach(r => {
+kişi.removeRole(r.id)
+data.set(`${member.guild.id}.jail.${kişi.id}.roles.${r.id}`, r.id )})
+    data.set(`${member.guild.id}.jail.${kişi.id}`, 'codare')
+  const wasted = new Discord.RichEmbed()
+  .setAuthor(member.user.tag, member.user.avatarURL)
+  .setColor(`#f3c7e1`)
+  .setDescription(`Aa, beni kandıramazsın!`)
+  .setTimestamp()
+    member.send(wasted)
+} 
+  
+  
+})// codare
