@@ -136,3 +136,32 @@ console.log(`Bir hata oluştu! ${e}`)
  }
 }
 });
+client.on("message" , async msg => {
+  
+  if(!msg.guild) return;
+  if(msg.content.startsWith(ayarlar.prefix+"afk")) return; 
+  
+  let afk = msg.mentions.users.first()
+  
+  const kisi = db.fetch(`afkid_${msg.author.id}_${msg.guild.id}`)
+  
+  const isim = db.fetch(`afkAd_${msg.author.id}_${msg.guild.id}`)
+ if(afk){
+   const sebep = db.fetch(`afkSebep_${afk.id}_${msg.guild.id}`)
+   const kisi3 = db.fetch(`afkid_${afk.id}_${msg.guild.id}`)
+   if(msg.content.includes(kisi3)){
+
+       msg.reply(`Etiketlediğiniz Kişi Afk \nSebep : ${sebep}`)
+   }
+ }
+  if(msg.author.id === kisi){
+
+       msg.reply(`Afk'lıktan Çıktınız`)
+   db.delete(`afkSebep_${msg.author.id}_${msg.guild.id}`)
+   db.delete(`afkid_${msg.author.id}_${msg.guild.id}`)
+   db.delete(`afkAd_${msg.author.id}_${msg.guild.id}`)
+    msg.member.setNickname(isim)
+    
+  }
+  
+});
