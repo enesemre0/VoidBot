@@ -4,7 +4,7 @@ exports.run = (client, message) => {
 
 let bilgi = new Discord.MessageEmbed()
   
-    .setThumbnail(message.author.displayAvatarURL())
+    .setThumbnail(client.user.avatarURL())
     .setAuthor(client.user.username, client.user.avatarURL)
     .addField(
       "Veriler", 
