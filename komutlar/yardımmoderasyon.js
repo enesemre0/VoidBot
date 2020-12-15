@@ -13,7 +13,11 @@ if(!args[0]) {
     .setDescription('[VoidBot\'u Hemen Ekle](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8)')
     .addField('Komutlar:', 
     `${prefix}rolver
-     ${prefix}rolal`)
+     ${prefix}rolal
+     ${prefix}jail
+     ${prefix}jailkanal
+     ${prefix}jailrol
+     ${prefix}jailyetkisi`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());

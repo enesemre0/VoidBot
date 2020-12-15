@@ -16,17 +16,17 @@ if (!args[0]) return message.reply(`Sistemi kullanabilmek için, &jail-yetkilisi
   
   if (args[0] == 'ayarla') {
   
-  let kanal = message.mentions.channels.first() || message.guild.channels.find(c => c.name === args[1].join('-'))
-  if (!kanal) return message.channel.send(x2 + ` Bir kanal etiketle.`)
+  let yetkilirol = message.mentions.roles.first() || message.guild.roles.find(c => c.name === args[1].join(' '))
+  if (!yetkilirol) return message.channel.send(x2 + ` Bir rol etiketle.`)
   
-  db.set(`jailkanal_${message.guild.id}`, kanal.id)
-  message.channel.send(x + ` Jail logunun tutulacağı kanal ${kanal} olarak ayarlandı.`)
+  db.set(`jailyetkilisi_${message.guild.id}`, yetkilirol.id)
+  message.channel.send(x + ` Jail yetkilisi ${yetkilirol} olarak ayarlandı.`)
   } 
   
 
   if (args[0] == 'sıfırla') {
-    db.delete(`jailkanal_${message.guild.id}`)
-    message.channel.send(x + ` Jail logunun tutulduğu kanal başarıyla sıfırlandı.`)
+    db.delete(`jailyetkilisi_${message.guild.id}`)
+    message.channel.send(x + ` Jail yetkilisi başarıyla sıfırlandı.`)
   }
   
   
@@ -34,14 +34,14 @@ if (!args[0]) return message.reply(`Sistemi kullanabilmek için, &jail-yetkilisi
 exports.conf = {
  enabled: true,
  guildOnly: false,
- aliases: ['jailkanal'],
+ aliases: ['jailyetkilisi'],
  permLevel: 0
 };
 
 exports.help = {
- name: 'jail-kanal',
- description: 'Birisi jaile atılınca hangi kanala mesaj atılacağını ayarlarsınız.',
- usage: 'jail-kanal ayarla/sıfırla #kanal',
+ name: 'jail-yetkilisi',
+ description: 'Hangi role sahip kişilerin jaile atabileceğini ayarlarsınız.',
+ usage: 'jail-yetkilisi ayarla/sıfırla @rol',
  kategori: '**MODERASYON**',
  permLvl: '**SUNUCUYU YÖNET**'
 };

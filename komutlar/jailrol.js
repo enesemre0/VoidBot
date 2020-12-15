@@ -7,11 +7,11 @@ exports.run = async(client, message, args) => {
    var başarılı = ['**İŞTE BU!** <:evetgif:787990148225957909>', '**SÜPER!** <:evetgif:787990148225957909>', '**NASIL YAPTIN BUNU?!** <:evetgif:787990148225957909>', '**MÜKEMMEL!** <:evetgif:787990148225957909>', '**SEVDİM BUNU!** <:evetgif:787990148225957909>', '**ŞİMDİ OLDU!** <:evetgif:787990148225957909>'];
    var x = başarılı[Math.floor(Math.random() * başarılı.length)];
 
-   var başarısız = ['**TÜH!** <:basarisiz:690022419116851268>', '**OLMADI BU!** <:basarisiz:690022419116851268>', '**HAY AKSİ!** <:basarisiz:690022419116851268>', '**HADİ ORADAN!** <:basarisiz:690022419116851268>', '**OLMADI YA!** <:basarisiz:690022419116851268>', '**BÖYLE OLMAZ?!** <:basarisiz:690022419116851268>', '**HADİ YA!** <:basarisiz:690022419116851268>'];
+   var başarısız = ['**TÜH!** <:hayirgif:787990150331760641>', '**OLMADI BU!** <:hayirgif:787990150331760641>', '**HAY AKSİ!** <:hayirgif:787990150331760641>', '**HADİ ORADAN!** <:hayirgif:787990150331760641>', '**OLMADI YA!** <:hayirgif:787990150331760641>', '**BÖYLE OLMAZ?!** <:hayirgif:787990150331760641>', '**HADİ YA!** <:hayirgif:787990150331760641>'];
    var x2 = başarısız[Math.floor(Math.random() * başarısız.length)];
   
 if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply(`**${ayarlar.prefix}jail-rol ayarla/sıfırla** isimli komutu kullanabilmek için \`SUNUCUYU YÖNET\` yetkisine sahip olman gerekiyor.`)
-if (!args[0]) return message.reply(`Sistemi kullanabilmek için, .jail-rol ayarla/sıfırla @rol yazmalısın.\nDetaylı bilgi için: .yardım sustur-kanal`)
+if (!args[0]) return message.reply(`Sistemi kullanabilmek için, &jail-rol ayarla/sıfırla @rol yazmalısın.\nDetaylı bilgi için: &yardım sustur-kanal`)
    
   
   if (args[0] == 'ayarla') {
