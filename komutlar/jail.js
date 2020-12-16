@@ -19,17 +19,17 @@ module.exports.run = async (client, message, args) => {
   let kanal = message.guild.channels.cache.get(data3);
   if (!kanal) return message.channel.send(`Jail log kanalı ayarlı değil.`);
 
-  if (!message.member.roles.has(`${yetkili.id}`))
+  if (!message.member.roles.cache.has(`${yetkili.id}`))
     return message.channel.send(
       `**${ayarlar.prefix}jail** isimli komutu kullanabilmek için ${yetkili} rolüne sahip olman gerekiyor.`
     );
   let kişi = message.guild.member(
-    message.mentions.users.first() || message.guild.members.get(args[0])
+    message.mentions.users.first() || message.guild.members.cache.get(args[0])
   );
   if (!kişi)
     return message.channel.send(`Kimi cezalandıracaksın? Etiketlemeyi unutma.`);
-  if (kişi.hasPermission("MANAGE_GUILD"))
-    return message.channel.send(`Olmaz. Bu kişiyi cezalandıramam.`);
+ // if (kişi.hasPermission("MANAGE_GUILD"))
+ //   return message.channel.send(`Olmaz. Bu kişiyi cezalandıramam.`);
 
   let zaman = args[1];
   if (!args[1])
@@ -40,7 +40,7 @@ module.exports.run = async (client, message, args) => {
   let sebep = args.join(" ").slice(args[1].length + args[0].length + 1);
   if (!sebep) sebep = "Sebep belirtilmemiş.";
 
-  const wasted = new Discord.RichEmbed()
+  const wasted = new Discord.MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL)
     .setColor(`#f3c7e1`)
     .setDescription(`Al işte! Yine biri hapishaneye yollandı.`)
@@ -50,17 +50,17 @@ module.exports.run = async (client, message, args) => {
     .addField(
       `**Süre:**`,
       zaman
-        .replace(/d/, " gün")
-        .replace(/s/, " saniye")
-        .replace(/m/, " dakika")
-        .replace(/h/, " saat"),
+        .replace("g", " gün")
+        .replace("sn", " saniye")
+        .replace("dk", " dakika")
+        .replace("s", " saat"),
       true
     )
     .setTimestamp()
     .setFooter(`${message.channel.name} kanalında kullanıldı.`)
     .setThumbnail(message.author.avatarURL);
 
-  const bitti = new Discord.RichEmbed()
+  const bitti = new Discord.MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL)
     .setDescription(`Birisi tahliye oldu!`)
     .addField(`**Tahliye olan:**`, kişi, true)
@@ -72,7 +72,7 @@ module.exports.run = async (client, message, args) => {
     )
     .setThumbnail(message.author.avatarURL);
 
-  kişi.addRole(rol.id);
+  kişi.role.add(rol.id);
   kişi.roles.forEach(r => {
     kişi.removeRole(r.id);
     db.set(`${message.guild.id}.jail.${kişi.id}.roles.${r.id}`, r.id);
