@@ -18,8 +18,8 @@ if(!args[0]) {
     message.channel.send(embed)
 };}
 exports.conf = {
-    aliases: []
+    aliases: ['kullanıcı']
 }
 exports.help = {
-    name: "yardım"
+    name: "yardım kullanıcı"
 }
