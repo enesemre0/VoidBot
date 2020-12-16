@@ -12,8 +12,8 @@ if(!args[0]) {
     .setAuthor('Eğlence Komutları', client.user.avatarURL())
     .setDescription('[VoidBot\'u Hemen Ekle](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8)')
     .addField('Komutlar:', 
-    `[${prefix}ağla(${desteksunucusu})]
-     [${prefix}fbi(${desteksunucusu})]`)
+    `[${prefix}ağla](${desteksunucusu})
+     [${prefix}fbi](${desteksunucusu})`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());

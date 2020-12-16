@@ -27,14 +27,14 @@ module.exports.run = async (client, message, args) => {
     message.mentions.users.first() || message.guild.members.get(args[0])
   );
   if (!kişi)
-    return message.channel.send(`Kimi susturacaksın? Etiketlemeyi unutma.`);
+    return message.channel.send(`Kimi cezalandıracaksın? Etiketlemeyi unutma.`);
   if (kişi.hasPermission("MANAGE_GUILD"))
-    return message.channel.send(`Olmaz. Bu kişiyi susturamam.`);
+    return message.channel.send(`Olmaz. Bu kişiyi cezalandıramam.`);
 
   let zaman = args[1];
   if (!args[1])
     return message.channel.send(
-      `Ne kadar süre jailde duracağını belirtmelisin.\nÖrnek: +jail kişi süre sebep`
+      `Ne kadar süre jailde duracağını belirtmelisin.\nÖrnek: &jail kişi süre sebep`
     );
 
   let sebep = args.join(" ").slice(args[1].length + args[0].length + 1);
@@ -50,10 +50,14 @@ module.exports.run = async (client, message, args) => {
     .addField(
       `**Süre:**`,
       zaman
-        .replace(/d/, " gün")
-        .replace(/s/, " saniye")
-        .replace(/m/, " dakika")
-        .replace(/h/, " saat"),
+        .replace("gün", " gün")
+        .replace("saniye", " saniye")
+        .replace("dakika", " dakika")
+        .replace("saat", " saat")
+        .replace(/g/, " gün")
+        .replace(/sn/, " saniye")
+        .replace(/dk/, " dakika")
+        .replace(/s/, " saat"),
       true
     )
     .setTimestamp()
