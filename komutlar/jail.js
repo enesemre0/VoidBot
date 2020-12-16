@@ -34,14 +34,14 @@ module.exports.run = async (client, message, args) => {
   let zaman = args[1];
   if (!args[1])
     return message.channel.send(
-      `Ne kadar süre jailde duracağını belirtmelisin.\nÖrnek: &jail kişi süre sebep`
+      `Ne kadar süre jailde duracağını belirtmelisin.\nÖrnek: &jail kişi süre sebep\nSüre için s - m - h - d ifadelerini kullanınız`
     );
 
   let sebep = args.join(" ").slice(args[1].length + args[0].length + 1);
   if (!sebep) sebep = "Sebep belirtilmemiş.";
 
   const wasted = new Discord.MessageEmbed()
-    .setAuthor(message.author.tag, message.author.avatarURL)
+    .setAuthor(message.author.tag, message.author.avatarURL())
     .setColor(`#f3c7e1`)
     .setDescription(`Al işte! Yine biri hapishaneye yollandı.`)
     .addField(`**Hapishaneye yollanan kişi:**`, kişi, true)
@@ -50,18 +50,18 @@ module.exports.run = async (client, message, args) => {
     .addField(
       `**Süre:**`,
       zaman
-        .replace("g", " gün")
-        .replace("sn", " saniye")
-        .replace("dk", " dakika")
-        .replace("s", " saat"),
+        .replace("d", " gün")
+        .replace("s", " saniye")
+        .replace("m", " dakika")
+        .replace("h", " saat"),
       true
     )
     .setTimestamp()
     .setFooter(`${message.channel.name} kanalında kullanıldı.`)
-    .setThumbnail(message.author.avatarURL);
+    .setThumbnail(message.author.avatarURL());
 
   const bitti = new Discord.MessageEmbed()
-    .setAuthor(message.author.tag, message.author.avatarURL)
+    .setAuthor(message.author.tag, message.author.avatarURL())
     .setDescription(`Birisi tahliye oldu!`)
     .addField(`**Tahliye olan:**`, kişi, true)
     .addField(`**Hakim:**`, `<@${message.author.id}>`, true)
@@ -70,28 +70,28 @@ module.exports.run = async (client, message, args) => {
     .setFooter(
       `Jail süresi bitti. | ${message.channel.name} kanalında kullanıldı.`
     )
-    .setThumbnail(message.author.avatarURL);
+    .setThumbnail(message.author.avatarURL());
 
-  kişi.role.add(rol.id);
-  kişi.roles.forEach(r => {
-    kişi.removeRole(r.id);
+  kişi.roles.add(rol.id);
+  kişi.roles.cache.forEach(r => {
+    kişi.roles.remove(r.id);
     db.set(`${message.guild.id}.jail.${kişi.id}.roles.${r.id}`, r.id);
   });
   db.set(`${message.guild.id}.jail.${kişi.id}`, "codare");
   kanal.send(wasted);
   message.channel.send(`${kişi} isimli kişi başarıyla hapishaneye gönderildi.`);
   setTimeout(async () => {
-    kişi.removeRole(rol.id);
+    kişi.roles.remove(rol.id);
     kanal.send(bitti);
   }, ms(zaman));
   setTimeout(async () => {
-    message.guild.roles.forEach(async r => {
+    message.guild.roles.cache.forEach(async r => {
       const i = await db.fetch(
         `${message.guild.id}.jail.${kişi.id}.roles.${r.id}`
       );
       if (i != r.id) return;
       if (i) {
-        kişi.addRole(i);
+        kişi.roles.add(i);
       }
       db.delete(`${message.guild.id}.jail.${kişi.id}.roles.${r.id}`);
     });
