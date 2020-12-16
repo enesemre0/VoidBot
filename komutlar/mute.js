@@ -3,8 +3,8 @@ const ms = require("ms");
 const client = new Discord.Client();
 const db = require("quick.db");
 exports.run = async (receivedMessage,  msg, args) => {
+  if (!msg.permissions.has("BAN_MEMBERS")) return msg.channel.send("<a:hayirgif:787990150331760641> Bu komudu kullanabilmek için `Üyeleri Yasakla` yetkisine sahip olman gerek.");
 let user = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[0]));
-        if (!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("<a:hayirgif:787990150331760641> Bu komudu kullanabilmek için `Üyeleri Yasakla` yetkisine sahip olman gerek.");
  if (user.permission.has("BAN_MEMBERS")) return msg.channel.send(`Hata! \`${user.tag}\` isimli kullanıcı bu sunucuda yetkili.`) 
 let log = await db.fetch(`mlog_${msg.guild.id}`) 
   if (!log) return msg.channel.send("Ayarlı Bir Mute Log Kanalı Yok! Ayarlamak için \`&mute-log #kanal\` !")  
