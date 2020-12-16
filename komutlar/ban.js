@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const db = require("quick.db")
 
 exports.run = async (client, message, args) => {
+  if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply(`Bu komutu kullanabilmek için *ÜYELERİ YASAKLA* iznine ihtiyacın var!`)
    let prefix = await require('quick.db').fetch(`prefix_${message.guild.id}`) || client.ayarlar.prefix || "&" //! yerine prefixiniz
   let guild = message.guild
   let reason = args.slice(1).join(' ');
