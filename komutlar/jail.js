@@ -50,14 +50,10 @@ module.exports.run = async (client, message, args) => {
     .addField(
       `**Süre:**`,
       zaman
-        .replace("gün", " gün")
-        .replace("saniye", " saniye")
-        .replace("dakika", " dakika")
-        .replace("saat", " saat")
-        .replace(/g/, " gün")
-        .replace(/sn/, " saniye")
-        .replace(/dk/, " dakika")
-        .replace(/s/, " saat"),
+        .replace(/d/, " gün")
+        .replace(/s/, " saniye")
+        .replace(/m/, " dakika")
+        .replace(/h/, " saat"),
       true
     )
     .setTimestamp()
