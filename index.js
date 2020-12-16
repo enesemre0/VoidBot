@@ -205,7 +205,7 @@ if(message.author.bot) return;
 if(message.channel.id !== "778615579933147139") return;
 let max 
 let min
-let qwe = random.int(min = 1, max = 5)
+let qwe = random.int(min = 60, max = 350)
 let xd1 = db.fetch(`zamanı.${message.guild.id+message.channel.id}`)
 if(!xd1) {
 db.set(`zamanı.${message.guild.id+message.channel.id}`,qwe)
@@ -218,7 +218,7 @@ if(xd1 == xd2) {
 
  db.delete(`zamanı.${message.guild.id+message.channel.id}`)
  db.delete(`zamanı1.${message.guild.id+message.channel.id}`)
-
+  
 message.channel.send("Birisi yere 175 Coin düşürdü! Almak için 5 saniye içinde &al yaz!").then(() => {
 	message.channel.awaitMessages(m => m.content === "&al", { max: 1, time: 5000, errors: ['time'] })
 		.then(collected => {
