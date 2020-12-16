@@ -21,7 +21,8 @@ if(!args[0]) {
      [${prefix}ban(${desteksunucusu})]
      [${prefix}unban(${desteksunucusu})]
      [${prefix}kick(${desteksunucusu})]
-     [${prefix}votekick(${desteksunucusu})]`)
+     [${prefix}votekick(${desteksunucusu})]
+     [${prefix}temizle(${desteksunucusu})]`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());
