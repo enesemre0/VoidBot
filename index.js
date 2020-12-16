@@ -258,4 +258,5 @@ client.on("message", async (msg, member, guild) => {
       msg.reply("<@" + msg.author.id + "> Aleyküm Selam, Hoşgeldin^^");
     }
   }
+  if (!msg.guild) return;
 });

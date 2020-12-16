@@ -3,16 +3,16 @@ const Discord = require("discord.js");
 const ayarlar = require("../ayarlar.json");
 
 exports.run = (client, message, args) => {
-  if (!message.member.hasPermission("MANAGE_MESSAGES"))
+/*  if (!message.member.hasPermission("MANAGE_MESSAGES"))
     return message.reply(
       `Bu komutu kullanabilmek için **Mesajları Yönet** iznine sahip olmalısın!`
-    );
+    );*/
 
   const tag = args.slice(0).join(" ");
 
   if (!tag)
     return message.reply(
-      `:warning: Bir Tag Girmelisiniz Örnek Kullanım; \n \`${ayarlar.prefix}tag-taraması G\``
+      `<a:hayirgif:787990150331760641> Bir Tag Girmelisiniz Örnek Kullanım; \n \`${ayarlar.prefix}tagsay tag\``
     );
 
   const memberss = message.guild.members.cache.filter(member =>
@@ -38,13 +38,13 @@ exports.conf = {
 
   guildOnly: true,
 
-  aliases: ["tag-tara", "tagtara", "tagtaraması", "tagtaraması", "tagtarama"],
+  aliases: ["tag-say"],
 
   permLevel: 0
 };
 
 exports.help = {
-  name: "tag-taraması",
+  name: "tagsay",
 
   description: "Kullanıcıların kullanıcı adını tarar.",
 
