@@ -259,21 +259,3 @@ client.on("message", async (msg, member, guild) => {
     }
   }
 });
-client.on('message', async message => {// chimp#6907
-  
-  if(!message.channel.id === '787983365369364480') return;
-  if(message.author.bot) return;
-  if(!message.content.startsWith(`${ayarlar.prefix}`)) {
-  message.delete()
-  message.channel.send(`Bu kanalda sadece komut kullanabilirsiniz.`).then(s => s.delete(5000)) }
-
-})// codare
-client.on('message', async message => {// chimp#6907
-  
-  if(!message.channel.id === '787983364451074049') return;
-  if(message.author.bot) return;
-  if(message.content.startsWith(`${ayarlar.prefix}`)) {
-  message.delete()
-  message.channel.send(`Bu kanalda sadece mesaj yazabilirsiniz.`).then(s => s.delete(5000)) }
-
-})// codare
