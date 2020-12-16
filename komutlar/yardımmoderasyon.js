@@ -19,7 +19,9 @@ if(!args[0]) {
      [${prefix}jailrol(${desteksunucusu})]
      [${prefix}jailyetkisi(${desteksunucusu})]
      [${prefix}ban(${desteksunucusu})]
-     [${prefix}unban(${desteksunucusu})]`)
+     [${prefix}unban(${desteksunucusu})]
+     [${prefix}kick(${desteksunucusu})]
+     [${prefix}votekick(${desteksunucusu})]`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());

@@ -8,27 +8,27 @@ let bilgi = new Discord.MessageEmbed()
     .setAuthor(client.user.username, client.user.avatarURL)
     .addField(
       "Veriler", 
-      `> Toplam sunucu: **${
+      `<a:sagok:706147013250514966> Toplam sunucu: **${
         client.guilds.cache.size
-      }** \n> Toplam kullanıcı: **${client.guilds.cache
+      }** \n<a:sagok:706147013250514966> Toplam kullanıcı: **${client.guilds.cache
         .reduce((a, b) => a + b.memberCount, 0)
-        .toLocaleString()}** \n> Toplam kanal: **${
+        .toLocaleString()}** \n<a:sagok:706147013250514966> Toplam kanal: **${
         client.channels.cache.size
       }**`
     ) 
     .addField(
       "Bot Geliştiricisi",
-      `> Bot geliştiricisi <@702905315674554389> | **EnesEmre**`
+      `<a:sagok:706147013250514966> Bot geliştiricisi <@702905315674554389> | **EnesEmre**`
     ) 
     .addField(
       "Sürümler",
-      `> Discord.js sürümü: **v${Discord.version}** \n> Node.js sürümü: **${process.version}**`
+      `<:bilgi:788333831437418496> Discord.js sürümü: **v${Discord.version}** \n<:bilgi:788333831437418496> Node.js sürümü: **${process.version}**`
     ) 
     .addField(
       "Gecikmeler",
-      `> Bot pingi: **${
+      `<:bilgi:788333831437418496> Bot pingi: **${
         client.ws.ping
-      }** \n> Mesaj gecikmesi: **${new Date().getTime() -
+      }** \n<a:sagok:706147013250514966> Mesaj gecikmesi: **${new Date().getTime() -
         message.createdTimestamp}**`
     )
     
