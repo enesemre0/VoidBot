@@ -9,24 +9,17 @@ let desteksunucusu = "https://discord.gg/UZFxuEfxtQ";
 
 if(!args[0]) {
     const embed = new Discord.MessageEmbed()
-    .setAuthor('Moderasyon Komutları', client.user.avatarURL())
+    .setAuthor('Genel Komutlar', client.user.avatarURL())
     .setDescription('[VoidBot\'u Hemen Ekle](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8)')
     .addField('Komutlar:', 
-    `${prefix}rolver
-     ${prefix}rolal
-     ${prefix}jail
-     ${prefix}jailkanal
-     ${prefix}jailrol
-     ${prefix}jailyetkisi
-     ${prefix}ban
-     ${prefix}unban`)
+    `${prefix}ağla`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());
     message.channel.send(embed);
 };}
 exports.conf = {
-    aliases: ["moderasyon"]
+    aliases: ["genel"]
 }
 exports.help = {
     name: "yardım genel"
