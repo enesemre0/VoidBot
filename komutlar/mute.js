@@ -64,7 +64,7 @@ db.delete(`muteli_${msg.guild.id + user.id}`)
     user.removeRole(mute.id)
  msg.channel.send(`<@${user.id}> Muten açıldı.`)
   }, ms(mutetime));
-
+if (!msg.guild) return;
 }
 exports.conf = {
   enabled: true,

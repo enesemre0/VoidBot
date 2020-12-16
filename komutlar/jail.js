@@ -5,18 +5,18 @@ const prefix = ayarlar.prefix;
 
 module.exports.run = async (client, message, args) => {
   let db = require("quick.db");
-  let botisim = message.guild.members.get(client.user.id).displayName;
+  let botisim = message.guild.members.cache.get(client.user.id).displayName;
   let data = await db.fetch(`jailrol_${message.guild.id}`);
   if (!data) return message.channel.send(`Jail rolünü bulamadım.`);
   let data2 = await db.fetch(`jailyetkilisi_${message.guild.id}`);
   if (!data2) return message.channel.send(`Jail yetkilisi rolünü bulamadım.`);
   let data3 = await db.fetch(`jailkanal_${message.guild.id}`);
   if (!data3) return message.channel.send(`Jail kanalını bulamadım.`);
-  let rol = message.guild.roles.get(data);
+  let rol = message.guild.roles.cache.get(data);
   if (!rol) return message.channel.send(`Jail rolü ayarlı değil.`);
-  let yetkili = message.guild.roles.get(data2);
+  let yetkili = message.guild.roles.cache.get(data2);
   if (!yetkili) return message.channel.send(`Jail yetkilisi ayarlı değil.`);
-  let kanal = message.guild.channels.get(data3);
+  let kanal = message.guild.channels.cache.get(data3);
   if (!kanal) return message.channel.send(`Jail log kanalı ayarlı değil.`);
 
   if (!message.member.roles.has(`${yetkili.id}`))
