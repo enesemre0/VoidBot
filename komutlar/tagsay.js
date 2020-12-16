@@ -31,6 +31,7 @@ exports.run = (client, message, args) => {
     .setColor("RANDOM");
 
   message.channel.send({ embed });
+  message.channel.send("Kullanıcı adında " + tag +" olan kullanıcılar: " + memberss);
 };
 
 exports.conf = {
