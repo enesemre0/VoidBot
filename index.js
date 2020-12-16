@@ -246,7 +246,7 @@ client.on("message", async (message, bot) => {
             );
           })
           .catch(collected => {
-            message.channel.send("Kimse zamanında yazamadı :C");
+            message.channel.send("Kimse zamanında yazamadı :c");
           });
       });
   }
@@ -255,7 +255,7 @@ client.on("message", async (msg, member, guild) => {
   let i = await db.fetch(`saas_${msg.guild.id}`);
   if (i === "açık") {
     if (msg.content.toLowerCase() === "sa") {
-      msg.reply("Aleyküm Selam, Hoşgeldin^^");
+      msg.reply("Aleyküm Selam Hoşgeldin^^");
     }
   }
   if (!msg.guild) return;
