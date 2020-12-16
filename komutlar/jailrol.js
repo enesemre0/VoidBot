@@ -4,10 +4,10 @@ const ayarlar = require('../ayarlar.json')
 
 exports.run = async(client, message, args) => {
   
-   var başarılı = ['**İŞTE BU!** <:evetgif:787990148225957909>', '**SÜPER!** <:evetgif:787990148225957909>', '**NASIL YAPTIN BUNU?!** <:evetgif:787990148225957909>', '**MÜKEMMEL!** <:evetgif:787990148225957909>', '**SEVDİM BUNU!** <:evetgif:787990148225957909>', '**ŞİMDİ OLDU!** <:evetgif:787990148225957909>'];
+   var başarılı = ['**İŞTE BU!** <a:evetgif:787990148225957909>', '**SÜPER!** <a:evetgif:787990148225957909>', '**NASIL YAPTIN BUNU?!** <a:evetgif:787990148225957909>', '**MÜKEMMEL!** <a:evetgif:787990148225957909>', '**SEVDİM BUNU!** <a:evetgif:787990148225957909>', '**ŞİMDİ OLDU!** <a:evetgif:787990148225957909>'];
    var x = başarılı[Math.floor(Math.random() * başarılı.length)];
 
-   var başarısız = ['**TÜH!** <:hayirgif:787990150331760641>', '**OLMADI BU!** <:hayirgif:787990150331760641>', '**HAY AKSİ!** <:hayirgif:787990150331760641>', '**HADİ ORADAN!** <:hayirgif:787990150331760641>', '**OLMADI YA!** <:hayirgif:787990150331760641>', '**BÖYLE OLMAZ?!** <:hayirgif:787990150331760641>', '**HADİ YA!** <:hayirgif:787990150331760641>'];
+   var başarısız = ['**TÜH!** <a:hayirgif:787990150331760641>', '**OLMADI BU!** <a:hayirgif:787990150331760641>', '**HAY AKSİ!** <a:hayirgif:787990150331760641>', '**HADİ ORADAN!** <a:hayirgif:787990150331760641>', '**OLMADI YA!** <a:hayirgif:787990150331760641>', '**BÖYLE OLMAZ?!** <a:hayirgif:787990150331760641>', '**HADİ YA!** <a:hayirgif:787990150331760641>'];
    var x2 = başarısız[Math.floor(Math.random() * başarısız.length)];
   
 if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply(`**${ayarlar.prefix}jail-rol ayarla/sıfırla** isimli komutu kullanabilmek için \`SUNUCUYU YÖNET\` yetkisine sahip olman gerekiyor.`)
