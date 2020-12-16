@@ -134,101 +134,146 @@ client.on("message", async msg => {
     msg.member.setNickname(isim);
   }
 });
-client.on('guildMemberAdd', async member => {// chimp ᵈ♡#0110
-const data = require('quick.db')
-const asd = data.fetch(`${member.guild.id}.jail.${member.id}`)
-if(asd) {
-let data2 = await data.fetch(`jailrol_${member.guild.id}`)
-let rol = member.guild.roles.get(data2)
-if(!rol) return;
-let kişi = member.guild.members.get(member.id)
-kişi.addRole(rol.id);
-kişi.roles.forEach(r => {
-kişi.removeRole(r.id)
-data.set(`${member.guild.id}.jail.${kişi.id}.roles.${r.id}`, r.id )})
-    data.set(`${member.guild.id}.jail.${kişi.id}`, 'codare')
-  const wasted = new Discord.RichEmbed()
-  .setAuthor(member.user.tag, member.user.avatarURL)
-  .setColor(`#f3c7e1`)
-  .setDescription(`Aa, beni kandıramazsın!`)
-  .setTimestamp()
-    member.send(wasted)
-} 
+client.on("guildMemberAdd", async member => {
+  // chimp ᵈ♡#0110
+  const data = require("quick.db");
+  const asd = data.fetch(`${member.guild.id}.jail.${member.id}`);
+  if (asd) {
+    let data2 = await data.fetch(`jailrol_${member.guild.id}`);
+    let rol = member.guild.roles.get(data2);
+    if (!rol) return;
+    let kişi = member.guild.members.get(member.id);
+    kişi.addRole(rol.id);
+    kişi.roles.forEach(r => {
+      kişi.removeRole(r.id);
+      data.set(`${member.guild.id}.jail.${kişi.id}.roles.${r.id}`, r.id);
+    });
+    data.set(`${member.guild.id}.jail.${kişi.id}`, "codare");
+    const wasted = new Discord.RichEmbed()
+      .setAuthor(member.user.tag, member.user.avatarURL)
+      .setColor(`#f3c7e1`)
+      .setDescription(`Aa, beni kandıramazsın!`)
+      .setTimestamp();
+    member.send(wasted);
+  }
+}); // codare
+client.on("guildMemberAdd", async member => {
+  let mute = member.guild.roles.find(r => r.name === "Muted");
+  let mutelimi = db.fetch(`muteli_${member.guild.id + member.id}`);
+  let süre = db.fetch(`süre_${member.id + member.guild.id}`);
+  if (!mutelimi) return;
+  if (mutelimi == "muteli") {
+    member.addRole(mute.id);
+
+    member.send("Muteliyken Sunucudan Çıktığın için Yeniden Mutelendin!");
+    setTimeout(function() {
+      // msg.channel.send(`<@${user.id}> Muten açıldı.`)
+      db.delete(`muteli_${member.guild.id + member.id}`);
+      member.send(`<@${member.id}> Muten açıldı.`);
+      member.removeRole(mute.id);
+    }, ms(süre));
+  }
+});
+
+client.on("message", async (msg, bot) => {
+  if (!msg.content.startsWith("&liderlik")) return;
+  const sorted = msg.guild.members.cache
+    .filter(u => !u.bot)
+    .array()
+    .sort((a, b) => {
+      return (
+        (db.fetch(`para.${b.user.id + msg.guild.id}`)
+          ? db.fetch(`para.${b.user.id + msg.guild.id}`)
+          : 0) -
+        (db.fetch(`para.${a.user.id + msg.guild.id}`)
+          ? db.fetch(`para.${a.user.id + msg.guild.id}`)
+          : 0)
+      );
+    });
+  const top10 = sorted.splice(0, 5);
+  const mappedCoin = top10
+    .filter(o => !o.bot)
+    .map(s => db.fetch(`para.${s.user.id + msg.guild.id}`) || 0);
+  const mappedName = top10.filter(o => !o.bot).map(s => s.user.tag);
+  let kedjik = [];
+  for (var i = 0; i < 5; i++) {
+    var coin = mappedCoin[i];
+    var name = mappedName[i];
+
+    if (coin > 0) {
+      kedjik.push(`[${i + 1}] > ${name}\n  Coin: ${coin} \n\n`);
+    }
+  }
+  let embed = new Discord.MessageEmbed()
+    .setColor("RANDOM")
+    .setTitle("Coin Sıralaması!")
+    .setDescription(kedjik);
+  msg.channel.send(embed);
+});
+client.on("message", async (message, bot) => {
+  const db = require("quick.db");
+  const random = require("random");
+  if (message.author.bot) return;
+  if (message.channel.id !== "778615579933147139") return;
+  let max;
+  let min;
+  let qwe = random.int((min = 60), (max = 350));
+  let xd1 = db.fetch(`zamanı.${message.guild.id + message.channel.id}`);
+  if (!xd1) {
+    db.set(`zamanı.${message.guild.id + message.channel.id}`, qwe);
+    return;
+  }
+  db.add(`zamanı1.${message.guild.id + message.channel.id}`, 1);
+  let xd2 = db.fetch(`zamanı1.${message.guild.id + message.channel.id}`);
+  if (xd1 == xd2) {
+    db.delete(`zamanı.${message.guild.id + message.channel.id}`);
+    db.delete(`zamanı1.${message.guild.id + message.channel.id}`);
+
+    message.channel
+      .send("Birisi yere 175 Coin düşürdü! Almak için 5 saniye içinde &al yaz!")
+      .then(() => {
+        message.channel
+          .awaitMessages(m => m.content === "&al", {
+            max: 1,
+            time: 5000,
+            errors: ["time"]
+          })
+          .then(collected => {
+            message.channel.send(`${collected.first().author} parayı aldı!`);
+            db.add(
+              `para.${collected.first().author.id + message.guild.id}`,
+              175
+            );
+          })
+          .catch(collected => {
+            message.channel.send("Kimse zamanında yazamadı :C");
+          });
+      });
+  }
+});
+client.on("message", async (msg, member, guild) => {
+  let i = await db.fetch(`saas_${msg.guild.id}`);
+  if (i === "açık") {
+    if (msg.content.toLowerCase() === "sa") {
+      msg.reply("<@" + msg.author.id + "> Aleyküm Selam, Hoşgeldin^^");
+    }
+  }
+});
+client.on('message', async message => {// chimp#6907
   
-  
+  if(!message.channel.id === '787983365369364480') return;
+  if(message.author.bot) return;
+  if(!message.content.startsWith(`${ayarlar.prefix}`)) {
+  message.delete()
+  message.channel.send(`Bu kanalda sadece komut kullanabilirsiniz.`).then(s => s.delete(5000)) }
+
 })// codare
-client.on('guildMemberAdd', async(member) => {
- let mute = member.guild.roles.find(r => r.name === "Muted");
-let mutelimi = db.fetch(`muteli_${member.guild.id + member.id}`)
-let süre = db.fetch(`süre_${member.id + member.guild.id}`)
-if (!mutelimi) return;
-if (mutelimi == "muteli") {
-member.addRole(mute.id)
- 
-member.send("Muteliyken Sunucudan Çıktığın için Yeniden Mutelendin!")
- setTimeout(function(){
-    // msg.channel.send(`<@${user.id}> Muten açıldı.`)
-db.delete(`muteli_${member.guild.id + member.id}`)
-    member.send(`<@${member.id}> Muten açıldı.`)
-    member.removeRole(mute.id);
-  }, ms(süre));
-}
-});
-
-client.on('message', async (msg , bot)=> { 
-if(!msg.content.startsWith("&liderlik")) return;
- const sorted = msg.guild.members.cache.filter(u => !u.bot).array().sort((a, b) => { return (db.fetch(`para.${b.user.id + msg.guild.id}`) ? db.fetch(`para.${b.user.id + msg.guild.id}`) : 0) - (db.fetch(`para.${a.user.id + msg.guild.id}`) ? db.fetch(`para.${a.user.id + msg.guild.id}`) : 0) });
-    const top10 = sorted.splice(0, 5)
-     const mappedCoin = top10.filter(o => !o.bot).map(s => db.fetch(`para.${s.user.id + msg.guild.id}`) || 0)
-     const mappedName = top10.filter(o => !o.bot).map(s => s.user.tag);
-let kedjik = []
- for(var i = 0; i < 5; i++) {
-            var coin = mappedCoin[i]
-            var name = mappedName[i]
-
-            if(coin > 0) {
-              kedjik.push(`[${i + 1}] > ${name}\n  Coin: ${coin} \n\n`) 
-            }
-
-           
-        }
-let embed = new Discord.MessageEmbed()
-.setColor("RANDOM")
-.setTitle("Coin Sıralaması!")
-.setDescription(kedjik)
-msg.channel.send(embed)
-})
-client.on('message', async (message , bot)=> { 
-const db = require("quick.db")
-const random = require("random");
-if(message.author.bot) return;
-if(message.channel.id !== "778615579933147139") return;
-let max 
-let min
-let qwe = random.int(min = 60, max = 350)
-let xd1 = db.fetch(`zamanı.${message.guild.id+message.channel.id}`)
-if(!xd1) {
-db.set(`zamanı.${message.guild.id+message.channel.id}`,qwe)
-return;
-}
-db.add(`zamanı1.${message.guild.id+message.channel.id}`,1)
-let xd2 =db.fetch(`zamanı1.${message.guild.id+message.channel.id}`)
-if(xd1 == xd2) {
-
-
- db.delete(`zamanı.${message.guild.id+message.channel.id}`)
- db.delete(`zamanı1.${message.guild.id+message.channel.id}`)
+client.on('message', async message => {// chimp#6907
   
-message.channel.send("Birisi yere 175 Coin düşürdü! Almak için 5 saniye içinde &al yaz!").then(() => {
-	message.channel.awaitMessages(m => m.content === "&al", { max: 1, time: 5000, errors: ['time'] })
-		.then(collected => {
-			message.channel.send(`${collected.first().author} parayı aldı!`);
-            db.add(`para.${collected.first().author.id + message.guild.id}`, 175)
+  if(!message.channel.id === '787983364451074049') return;
+  if(message.author.bot) return;
+  if(message.content.startsWith(`${ayarlar.prefix}`)) {
+  message.delete()
+  message.channel.send(`Bu kanalda sadece mesaj yazabilirsiniz.`).then(s => s.delete(5000)) }
 
-		})
-		.catch(collected => {
-			message.channel.send('Kimse zamanında yazamadı :C');
-		});
-});
-}
-})
+})// codare

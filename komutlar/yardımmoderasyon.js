@@ -24,7 +24,8 @@ if(!args[0]) {
      [${prefix}votekick(${desteksunucusu})]
      [${prefix}temizle(${desteksunucusu})]
      [${prefix}mute(${desteksunucusu})]
-     [${prefix}mutelog(${desteksunucusu})]`)
+     [${prefix}mutelog(${desteksunucusu})]
+     [${prefix}sa-as(${desteksunucusu})]`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());
