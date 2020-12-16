@@ -12,10 +12,11 @@ if(!args[0]) {
     .setAuthor('Genel Komutlar', client.user.avatarURL())
     .setDescription('[VoidBot\'u Hemen Ekle](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8)')
     .addField('Komutlar:', 
-    `${prefix}rolbilgi
-     ${prefix}afk
-     ${prefix}istatistik
-     ${prefix}avatar`)
+    `[${prefix}rolbilgi(${desteksunucusu})]
+     [${prefix}afk(${desteksunucusu})]
+     [${prefix}istatistik(${desteksunucusu})]
+     [${prefix}avatar(${desteksunucusu})]
+     [${prefix}korona${desteksunucusu})]`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());

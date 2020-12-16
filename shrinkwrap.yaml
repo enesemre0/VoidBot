@@ -1,4 +1,5 @@
 dependencies:
+  axios: 0.21.0
   canvas: 2.6.1
   chalk: 4.1.0
   common-tags: 1.8.0
@@ -527,6 +528,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=
+  /axios/0.21.0:
+    dependencies:
+      follow-redirects: 1.13.1
+    dev: false
+    resolution:
+      integrity: sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
   /balanced-match/1.0.0:
     dev: false
     resolution:
@@ -953,6 +960,12 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA==
+  /follow-redirects/1.13.1:
+    dev: false
+    engines:
+      node: '>=4.0'
+    resolution:
+      integrity: sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
   /form-data/2.5.1:
     dependencies:
       asynckit: 0.4.0
@@ -2336,6 +2349,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  axios: ^0.21.0
   canvas: ^2.6.1
   chalk: ^4.1.0
   common-tags: ^1.8.0

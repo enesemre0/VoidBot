@@ -12,14 +12,14 @@ if(!args[0]) {
     .setAuthor('Moderasyon Komutları', client.user.avatarURL())
     .setDescription('[VoidBot\'u Hemen Ekle](https://discord.com/oauth2/authorize?client_id=723523223047766046&scope=bot&permissions=8)')
     .addField('Komutlar:', 
-    `${prefix}rolver
-     ${prefix}rolal
-     ${prefix}jail
-     ${prefix}jailkanal
-     ${prefix}jailrol
-     ${prefix}jailyetkisi
-     ${prefix}ban
-     ${prefix}unban`)
+    `[${prefix}rolver(${desteksunucusu})]
+     [${prefix}rolal(${desteksunucusu})]
+     [${prefix}jail(${desteksunucusu})]
+     [${prefix}jailkanal(${desteksunucusu})]
+     [${prefix}jailrol(${desteksunucusu})]
+     [${prefix}jailyetkisi(${desteksunucusu})]
+     [${prefix}ban(${desteksunucusu})]
+     [${prefix}unban(${desteksunucusu})]`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());
@@ -29,5 +29,5 @@ exports.conf = {
     aliases: ["moderasyon"]
 }
 exports.help = {
-    name: "yardım genel"
+    name: "yardım eğlence"
 }

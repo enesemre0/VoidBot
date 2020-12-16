@@ -1,52 +1,62 @@
-const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
 
-exports.run = async (client, message, args) => {
+exports.run = (client, message, args) => {
+  if (!message.member.hasPermission("KICK_MEMBERS"))
+    return message.channel.send(
+      "Bu Komut Yetkililere Özeldir Sen Yetkili Olmadığın İçin Kullanamazsın."
+    );
+  if (!message.guild.me.hasPermission("KICK_MEMBERS"))
+    return message.channel.send(
+      "Yetkilerim çok az bu işlemi yapamamaktayım maalesef"
+    );
+
+  const member =
+    message.mentions.members.first() ||
+    message.guild.members.cache.get(args[0]);
+
   if (!args[0])
-    return message.channel.send(
-      `${message.author}Lütfen kimi kicklemek istediğinizi belirtin! (Lütfen kullanıcı İD veya kullanıcı adını belirtin)`
-    );
-  let User = message.guild.members.cache.get(args[0]);
-  if (!User)
-    return message.channel.send(
-      `Bu sunucudaki bir kullanıcı değil! Tekrar deneyin`
-    );
-  let Reason = message.content.split(`!kick ${User.id} `);
-  if (!args[1])
-    return message.channel.send(
-      `Lütfen bir neden belirtin! Nedeni olmayan birini atamazsın, değil mi?`
-    );
-  if (!Reason)
-    return message.channel.send(
-      `Lütfen bir neden belirtin! Nedeni olmayan birini atamazsın, değil mi?`
-    );
-  if (!User.kickable)
-    return message.channel.send(
-      `Motion | You can not kick this user, they may have a role higher then me or the same role as me.`
-    );
-  if (!message.member.permissions.has("KICK_MEMBERS"))
-    return message.channel.send(`Bu Komutu Kullanmağa Malesef İznin Yok!`);
-  User.kick(Reason);
-  const motion = new MessageEmbed()
-    .setTitle(` | You have kicked a member!`)
-    .setDescription(
-      `Bu Kullanıcı ${
-        client.users.cache.get(User.id).username
-      } Başarıyla Sunucudan Kicklendi!`
-    )
-    .setColor(`RANDOM`);
-  message.channel.send(motion);
-  //her zamanki atma komutu işte
-};
+    return message.channel.send("Kullanıcı Belirtmeyi Unuttun Sanki?");
 
+  if (!member)
+    return message.channel.send(
+      "Kicklemek İstediğin Kullanıcıyı Bulamıyorum Doğru Kişiyi Aradığına Eminmisin?"
+    );
+  if (!member.kickable)
+    return message.channel.send(
+      "Bu Kullanıcı Kicklenemez. Mod & Yönetici Oldukları İçin Yada En Yüksek Rolleri Benimkinden Daha Yüksek Oldundan Banlayamamaktayım."
+    );
+
+  if (member.id === message.author.id)
+    return message.channel.send("Dostum Kendini Yasaklamayamı Çalıştın Sen?.");
+
+  let reason = args.slice(1).join(" ");
+
+  if (reason === undefined) reason = "belirtilmemiş";
+
+  member.kick(reason).catch(err => {
+    if (err) return message.channel.send("Bazı Şeyler Ters Gitti Sanırsam?");
+  });
+
+  const kickembed = new Discord.MessageEmbed()
+    .setTitle("Üye Atıldı")
+    .setThumbnail(member.user.displayAvatarURL())
+    .addField("Kullanıcı Atıldı", member)
+    .addField("Tarafından Atıldı", message.author)
+    .addField("Sebebi", reason)
+    .setFooter("Kullanıcı Atıldı", client.user.displayAvatarURL())
+    .setTimestamp();
+
+  message.channel.send(kickembed);
+};
 exports.conf = {
-  enabled: false,
+  enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ["kick"],
   permLevel: 0
 };
 
 exports.help = {
   name: "kick",
-  description: "",
-  usage: ""
+  description: "kick ",
+  usage: "kick"
 };
