@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const db = require("quick.db");
 exports.run = async (receivedMessage,  msg, args) => {
 let user = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
-        if (!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("Bu komudu kullanabilmek için `Ban` yetkisine sahip olmanız gerek.");
+        if (!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("<a:hayirgif:787990150331760641> Bu komudu kullanabilmek için `Üyeleri Yasakla` yetkisine sahip olman gerek.");
  if (user.hasPermission("BAN_MEMBERS")) return msg.channel.send(`Hata! \`${user.tag}\` isimli kullanıcı bu sunucuda yetkili.`) 
 let log = await db.fetch(`mlog_${msg.guild.id}`) 
   if (!log) return msg.channel.send("Ayarlı Bir Mute Log Kanalı Yok! Ayarlamak için \`-mute-log #kanal\` !")  
@@ -12,7 +12,7 @@ var mod = msg.author
 var reason = args[1]
  let sebep = args.slice(2).join(' ')
 
-  if (!user) return msg.reply('<a:hayirgif:787990150331760641> Kullanıcı Etiketlemedin')
+  if (!user) return msg.reply('<a:hayirgif:787990150331760641> Kullanıcı Etiketlemedin!')
  if (!reason) return msg.reply('<a:hayirgif:787990150331760641> Süre Belirtmedin! Seçeneklerin : 1sn/1dk/1s/1g/1h')
 if (!sebep) return msg.reply('<a:hayirgif:787990150331760641> Sebep Belirtmedin!')
 

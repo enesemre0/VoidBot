@@ -22,7 +22,9 @@ if(!args[0]) {
      [${prefix}unban(${desteksunucusu})]
      [${prefix}kick(${desteksunucusu})]
      [${prefix}votekick(${desteksunucusu})]
-     [${prefix}temizle(${desteksunucusu})]`)
+     [${prefix}temizle(${desteksunucusu})]
+     [${prefix}mute(${desteksunucusu})]
+     [${prefix}mutelog(${desteksunucusu})]`)
     .setThumbnail(client.user.avatarURL())
     .setColor("RANDOM")
     .setFooter('Bu komutu kullanan kullanıcı ' + message.author.tag, message.author.avatarURL());
