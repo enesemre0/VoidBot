@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const moment = require('moment');
+moment.locale('tr');
 
 exports.run = async (client, message, args) => {
   const motion = new Discord.MessageEmbed()

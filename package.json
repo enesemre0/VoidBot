@@ -1,48 +1,52 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
+  "name": "voidbot",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "description": "VoidBot by EnesEmre - Lisans MIT İle Korunduğu İçin Çalınması Durumunda Hukuki İşlem Başlatılacaktır.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "author": "EnesEmre",
+  "license": "MIT",
   "dependencies": {
+    "alexflipnote.js": "^2.3.4",
+    "axios": "^0.21.1",
+    "better-sqlite3": "^7.1.1",
+    "bindings": "^1.5.0",
     "canvas": "^2.6.1",
+    "captcha-plus": "^2.5.2",
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
+    "dblapi.js": "^2.4.1",
     "discord-logs": "^1.7.7",
     "discord.js": "^12.4.1",
+    "discord.js-commando": "^0.10.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "google-play-scraper": "^8.0.2",
     "hastebin-gen": "^2.0.5",
+    "http": "0.0.1-security",
     "jimp": "^0.16.1",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
+    "node-fetch": "^2.6.1",
+    "node-gyp": "^7.1.2",
     "node-superfetch": "^0.1.10",
     "novelcovid": "^3.0.0",
+    "os": "^0.1.1",
     "parse-ms": "^2.1.0",
     "pokedex-api": "^1.1.2",
     "quick.db": "^7.1.3",
+    "random": "^2.2.0",
     "random-puppy": "^1.1.0",
-    "simple-youtube-api": "^5.2.1",
+    "request": "^2.88.2",
+    "riotgames-gg": "0.0.7",
     "snekfetch": "^4.0.4",
     "superagent": "^6.1.0",
-    "ytdl-core": "^4.0.3",
-    "axios": "^0.21.0",
-    "random": "^2.2.0"
+    "tcmb-doviz": "^1.0.6",
+    "tesseract.js": "^2.1.4"
   },
   "engines": {
     "node": "12.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  }
 }

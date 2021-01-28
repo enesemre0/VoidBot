@@ -1,1 +1,1 @@
-- Bu altyapı Berk'e aittir. Çalınması ya da kopyalanması durumunda hukuki işlem başlatılacaktır.
+Bu Bir Altyapı Değildir, Bir Projedir. Çalınması veya Kopyalanması Durumunda Hukuki İşlem Başlatılacaktır.

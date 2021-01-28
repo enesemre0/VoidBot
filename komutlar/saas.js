@@ -1,5 +1,7 @@
 const db = require('quick.db')
+const moment = require('moment');
 const Discord = require('discord.js')
+moment.locale('tr');
 
 exports.run = async (bot, message, args) => {
   

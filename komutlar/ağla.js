@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
+const moment = require('moment');
 const bot = require("../index.js");
+moment.locale('tr');
 
 exports.run = (client, message) => {
   if (!message.guild) {

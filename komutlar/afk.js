@@ -1,5 +1,8 @@
 const Discord = require("discord.js");
+const moment = require('moment');
 const db = require("quick.db");
+moment.locale('tr');
+
 exports.run = async (client, message, args) => {
   const kisi = db.fetch(`afkid_${message.author.id}_${message.guild.id}`);
   if (kisi) return;
@@ -21,10 +24,16 @@ exports.run = async (client, message, args) => {
     const a = await db.fetch(
       `afkSebep_${message.author.id}_${message.guild.id}`
     );
+    const enesemres = new Discord.MessageEmbed()
+      .setTitle("AFK")
+      .setDescription("Başarıyla Afk Oldunuz.\nAfk Olma Sebebi: " + a)
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setFooter(message.author.username + "#" + message.author.discriminator + " Afk Oldu.")
 
-    message.channel.send(`Başarıyla Afk Oldunuz \n Sebep: ${a}`);
+    message.channel.send(enesemres);
 
-    message.author.setNickname(`[AFK] ` + b);
+    message.member.setNickname(`[AFK] ` + b);
   }
   if (args[0]) {
     let sebep = args.join(" ");
@@ -39,10 +48,15 @@ exports.run = async (client, message, args) => {
     const a = await db.fetch(
       `afkSebep_${message.author.id}_${message.guild.id}`
     );
+    const enesemre = new Discord.MessageEmbed()
+      .setTitle("AFK")
+      .setDescription("Başarıyla Afk Oldunuz.\nAfk Olma Sebebi: " + a)
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setFooter(message.author.username + "#" + message.author.discriminator + " Afk Oldu.")
+    await message.channel.send(enesemre);
 
-    message.channel.send(`Başarıyla Afk Oldunuz \n Sebep: ${a}`);
-
-    message.author.setNickname(`[AFK] ` + b);
+    await message.member.setNickname(`[AFK] ` + b);
   }
 };
 

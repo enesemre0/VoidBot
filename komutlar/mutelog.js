@@ -1,11 +1,13 @@
 const Discord = require('discord.js')
 const db = require('quick.db');
+const moment = require('moment');
 
 exports.run = async (client, message, args) => {
-  
+  moment.locale('tr');
+
  if (!message.member.hasPermission("MANAGE_MESSAGES")) {
   const bilgi = new Discord.RichEmbed()
-  .setDescription('Bu komutu kullanabilmek için **Mesajları Yönet** yetkisine sahip olmanız gerek.')
+  .setDescription('<a:hayirgif:787990150331760641> Bu komutu kullanabilmek için **Mesajları Yönet** yetkisine sahip olmanız gerek.')
   .setColor("0000A0")
 return message.channel.sendEmbed(bilgi).then(m => m.delete(150000)); return
        }
@@ -13,7 +15,7 @@ return message.channel.sendEmbed(bilgi).then(m => m.delete(150000)); return
   let sıfırla = db.fetch(`mlog_${message.guild.id}`)
 if(args[0] === "sıfırla") {
     if(!sıfırla) {
-      message.channel.send(`Mute Log Kanalı zaten ayarlı değil.`)
+      message.channel.send(`<a:hayirgif:787990150331760641> Mute Log Kanalı zaten ayarlı değil.`)
                      
       return
     }
@@ -24,7 +26,7 @@ if(args[0] === "sıfırla") {
   }
   if (!mlog) {
     return message.channel.send(
-    `Mute Log Olacak Kanalı etiketlemelisin.`)                       
+    `<a:hayirgif:787990150331760641> Mute Log Olacak Kanalı etiketlemelisin.`)                       
   }
   db.set(`mlog_${message.guild.id}`, mlog.id)
   message.channel.send(`<a:evetgif:787990148225957909> Mute Log Kanalı başarıyla ${mlog} olarak ayarlandı.`)
@@ -33,7 +35,7 @@ if(args[0] === "sıfırla") {
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: ['mute-log', 'mutelog'],
+    aliases: ['mute-log'],
     permLevel: 0
 }
 

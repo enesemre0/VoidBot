@@ -1,4 +1,6 @@
 const { MessageEmbed } = require('discord.js');
+const moment = require('moment');
+moment.locale('tr');
 
 exports.run = async (client, message, args) => {
     if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(new MessageEmbed().setDescription(`:x: Yetkin yeterli değil!`))

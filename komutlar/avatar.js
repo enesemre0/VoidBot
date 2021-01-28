@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const moment = require('moment');
+moment.locale('tr');
 
 exports.run = async (client, message, args)=> {
 //let us = message.guild.members.cache.find(u => args.slice(0).join(' ').includes(u.username))
@@ -45,7 +47,7 @@ message.channel.send(embed)
  exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['avatarım'],
+  aliases: ['avatarım','av'],
   permLevel: 0
 };
 

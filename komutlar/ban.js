@@ -1,35 +1,35 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
-const db = require("quick.db")
+const ayarlar = require('../ayarlar.json');
 
 exports.run = async (client, message, args) => {
-  if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply(`Bu komutu kullanabilmek için *ÜYELERİ YASAKLA* iznine ihtiyacın var!`)
-   let prefix = await require('quick.db').fetch(`prefix_${message.guild.id}`) || client.ayarlar.prefix || "&" //! yerine prefixiniz
+  if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(new Discord.MessageEmbed().setTitle("Hata!").setDescription(`Bu komutu kullanabilmek için \`Üyeleri Yasakla\` iznine ihtiyacın var!`).setColor("RED").setTimestamp().setFooter(message.author.tag, message.author.displayAvatarURL({dynamic: true})))
   let guild = message.guild
   let reason = args.slice(1).join(' ');
-  let user = message.mentions.users.first() || client.users.cache.get(args[0])
-  if (!user) return message.reply('<a:hayirgif:787990150331760641> Kimi banlayacağını yazmalısın.').catch(console.error);
-  if (reason.length < 1) return message.reply('<a:hayirgif:787990150331760641> Ban sebebini yazmalısın.');
-  guild.members.ban(user, { reason: reason });
-  message.channel.send("<a:evetgif:787990148225957909> Kullanıcı başarıyla banlandı.")
+  let uye = message.mentions.users.first() || client.users.cache.get(args[0])
+  if (!uye) return message.reply(new Discord.MessageEmbed().setTitle("Hata!").setDescription('<a:hayirgif:787990150331760641> Kimi banlayacağını yazmalısın.').setColor("RED").setTimestamp().setFooter(message.author.tag, message.author.displayAvatarURL({dynamic: true}))).catch(console.error);
+  if(!uye.bannable) return message.channel.send(new Discord.MessageEmbed().setTitle("Hata!").setDescription("Banlamaya Çalıştığınız Kişi Yetkili/Mod veya Benim Rolümden Üstün Olduğu için Banlayamamaktayım!").setColor("RED").setTimestamp().setFooter(message.author.tag, message.author.displayAvatarURL({dynamic: true})))
+  if(reason === undefined) reason = "Sebep Belirtilmemiş."
+  await guild.members.ban(uye, {reason: reason})
+  return uye.ban(reason).catch(err => {
+    message.channel .send("Bazı Şeyler Ters Gitti.")
+  })
 
   const embed = new Discord.MessageEmbed()
-    .setColor("RANDOM")
-    .setTimestamp()
-    .addField('Eylem:', 'Ban')
-    .addField('Kullanıcı:', `${user.username}#${user.discriminator} (${user.id})`)
-    .addField('Yetkili:', `${message.author.username}#${message.author.discriminator}`)
-    .addField('Sebep', reason);
-message.channel.send(embed)
-  
-};
+      .setTitle("Yasaklama İşlemi Başarılı!")
+      .setColor("RANDOM")
+      .setTimestamp()
+      .addField('Yasaklanan Kişi:', `${uye.tag} (${uye.id})`)
+      .addField('Yetkili:', `${message.author.tag} (${message.author.id})`)
+      .addField('Sebep:', reason);
+  await message.channel.send(embed)
+
+}
 
 exports.conf = {
   enabled: true,
   guildOnly: true,
   aliases: [],
-  permLevel: 2,
-  kategori: "mod"
+  permLevel: 0,
 };
 exports.help = { 
 	name: 'ban', 

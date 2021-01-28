@@ -1,5 +1,7 @@
-const emran = require('discord.js')
+const discord = require('discord.js')
+const moment = require('moment');
 const ayarlar = require('../ayarlar.json')
+moment.locale('tr');
 
 exports.run = async (client, msg, args) => {
       let prefix = ayarlar.prefix
@@ -7,13 +9,13 @@ exports.run = async (client, msg, args) => {
 
     let role = msg.mentions.roles.first() || msg.guild.roles.cache.get(args[0]) || msg.guild.roles.cache.find(role => role.name === args.join(' '));
   
-  var hata = new emran.MessageEmbed()
+  var hata = new discord.MessageEmbed()
   .setColor("#36393F")
-  .setDescription(`Lütfen Bir Rol Etiketleyin yada İsmini Girin Örnek: \`${prefix}rolbilgi @Üye - Üye\``);
+  .setDescription(`Lütfen Bir Rol Etiketleyin yada İsmini Giriniz - Örnek: \`${prefix}rolbilgi @Üye - Üye\``);
   if(!role) return msg.channel.send(hata);
 
         let hex = role.hexColor.toString().slice(1)
-        let embed = new emran.MessageEmbed()
+        let embed = new discord.MessageEmbed()
             .setThumbnail(`http://colorhexa.com/${hex}.png`)
             .addField("Rol İsmi", role.name, false)
             .addField(`Rol ID`, role.id, false)
@@ -24,7 +26,7 @@ exports.run = async (client, msg, args) => {
             .addField("Kaç Kullanıcıda Bulunuyor", role.members.size, false)
        .setFooter('Bu komutu kullanan kullanıcı ' + msg.author.tag, msg.author.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
             .setTimestamp(role.createdAt)
-        msg.channel.send(embed)
+        await msg.channel.send(embed)
     }
 
 exports.conf = {

@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const ayarlar = require('../ayarlar.json');
 const client = new Discord.Client();
 const bot = new Discord.Client();
 const {RichEmbed} = require('discord.js');
@@ -11,9 +12,10 @@ const moment = require('moment');
 const { Client, Util } = require('discord.js');
 const db = require('quick.db');
 const Jimp = require('jimp')
+
  
 exports.run = (client, message, args) => {
-   if(message.author.id !== "702905315674554389") return message.channel.send(":no_entry: Vay Çakal Bu Sahibimin Komutu");
+   if(message.author.id !== ayarlar.sahip) return message.channel.send(":no_entry: Vay Çakal Bu Sahibimin Komutu");
     try {
       var code = args.join(" ");
       var evaled = eval(code);

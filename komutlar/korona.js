@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
+const moment = require('moment');
 const ayarlar = require("../index.js");
 const axios = require("axios");
+moment.locale('tr');
+
 exports.run = async (client, message, args) => {
   if (!args.length) {
     axios
@@ -10,8 +13,8 @@ exports.run = async (client, message, args) => {
           .setColor("BLUE")
           .setTitle("Dünya Geneli COVID-19 Bilgileri")
           .setDescription(
-            "Tanı konulan vakalar, ölümler ve dünya çapında gelişmeler \n Ülkeler hakkında bilgi almak için " +
-              ` \`covid turkey\` `
+            "Tanı konulan vakalar, ölümler ve dünya çapında gelişmeler. \n Ülkeler hakkında bilgi almak için " +
+              ` \`covid ülkeismi\` `
           )
           .addField(`Tanı Konulan Hasta Sayısı`, response.data.cases)
           .addField(`Toplam Ölüm`, response.data.deaths)
@@ -61,7 +64,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "corona-bilgi",
+  name: "korona",
   description: "Ülkelerdeki COVID-19 vakalarını inceyelebilirsiniz #Pink Code Share",
   usage: "korona <ülke>"
 };
